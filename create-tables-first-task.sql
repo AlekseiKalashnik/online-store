@@ -4,14 +4,34 @@ CREATE TABLE customer
     firstname    VARCHAR(50)  NOT NULL,
     lastname     VARCHAR(50)  NOT NULL,
     "login"      VARCHAR(50)  NOT NULL UNIQUE,
-    address      VARCHAR(255) NOT NULL,
     dob          DATE         NOT NULL,
     gender       VARCHAR(50)  NOT NULL,
     email        VARCHAR(100) NOT NULL UNIQUE,
     phone_number BIGINT       NOT NULL UNIQUE,
     "password"   VARCHAR(50)  NOT NULL,
-    created_at   DATE DEFAULT now(),
-    last_login   DATE
+    created_at   TIMESTAMP DEFAULT now(),
+    modified_at  TIMESTAMP
+);
+
+CREATE TABLE customer_address
+(
+    id          SERIAL PRIMARY KEY,
+    customer_id INTEGER REFERENCES customer (id),
+    city        VARCHAR(100) NOT NULL,
+    postal_code VARCHAR(100) NOT NULL,
+    country     VARCHAR(100) NOT NULL,
+    street      VARCHAR(100) NOT NULL,
+    house       VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE customer_payment
+(
+    id             SERIAL PRIMARY KEY,
+    customer_id    INTEGER REFERENCES customer (id),
+    payment_type   VARCHAR(100) NOT NULL,
+    "provider"     VARCHAR(100) NOT NULL,
+    account_number INTEGER,
+    expiry         DATE
 );
 
 CREATE TABLE product
@@ -19,7 +39,10 @@ CREATE TABLE product
     id           SERIAL PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
     description  VARCHAR(255),
-    price        INTEGER CHECK ( price >= 0 )
+    price        INTEGER CHECK ( price >= 0 ),
+    created_at   TIMESTAMP DEFAULT now(),
+    modified_at  TIMESTAMP,
+    deleted_at   TIMESTAMP
 );
 
 CREATE TABLE "order"
@@ -28,7 +51,8 @@ CREATE TABLE "order"
     customer_id INTEGER REFERENCES customer (id),
     product_id  INTEGER REFERENCES product (id),
     quantity    INTEGER CHECK ( quantity >= 0 ),
-    created_at  DATE DEFAULT now()
+    created_at  TIMESTAMP DEFAULT now(),
+    modified_at TIMESTAMP
 );
 
 CREATE TABLE "category"
