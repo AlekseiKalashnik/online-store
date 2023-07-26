@@ -73,3 +73,12 @@ docker build --platform linux/amd64 -t online-store-app .
 
 docker run -p 8080:8080 -t online-store-app
 ``` 
+**4. Доступ к API:**
+
+Используя браузер
++ http://localhost:8080/swagger-ui/index.html#/event-controller
+
+Используя Postman
++ http://localhost:8080/api/v1/events/addEvent
++ http://localhost:8080/api/v1/events/{pageNumber}/{pageSize}
++ http://localhost:8080/api/v1/events/{pageNumber}/{pageSize}/{classifier}
