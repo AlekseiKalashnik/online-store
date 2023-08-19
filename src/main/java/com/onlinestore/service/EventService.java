@@ -1,7 +1,6 @@
 package com.onlinestore.service;
 
 import com.onlinestore.dto.EventDTO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
