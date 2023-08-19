@@ -1,7 +1,6 @@
 package com.onlinestore.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +19,6 @@ public class Event {
     private Integer id;
 
     @Column(name = "name")
-    @Size(min = 1, max = 72, message = "name should be between 1 and 72 characters")
     private String name;
 
     @Column(name = "date")
