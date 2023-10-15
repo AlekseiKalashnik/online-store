@@ -74,11 +74,11 @@ public class EventServiceImpl implements EventService{
         event.setDate(LocalDateTime.now());
     }
 
-    private Event convertToEvent(EventDTO eventDTO) {
+    public Event convertToEvent(EventDTO eventDTO) {
         return modelMapper.map(eventDTO, Event.class);
     }
 
-    private EventDTO convertToEventDTO(Event event) {
+    public EventDTO convertToEventDTO(Event event) {
         return modelMapper.map(event, EventDTO.class);
     }
 }
